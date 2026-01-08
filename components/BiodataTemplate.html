@@ -1,176 +1,274 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Marriage Bio-Data</title>
+  <meta charset="UTF-8">
+  <title>विवाह बायोडाटा</title>
+
   <style>
     body {
       background: #f5f5f5;
+      padding: 20px;
+      font-family: "Noto Serif Devanagari", Mangal, serif;
     }
 
     .biodata-container {
-      max-width: 800px;
-      margin: 20px auto;
+      max-width: 850px;
+      margin: auto;
       background: #fff;
-      padding: 40px;
-      border: 1px solid #ddd;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      font-family: 'Georgia', serif;
-      color: #333;
+      border: 8px solid #b8891a;
+       border-radius: 10px;
+      padding: 25px;
     }
 
-    .header {
+    .inner-border {
+      border: 2px solid #d4af37;
+      border-radius: 10px;
+      padding: 10px 50px;
+    }
+
+  .header {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      border-bottom: 2px solid #8e1e1e;
-      margin-bottom: 30px;
+      
       padding-bottom: 10px;
+    
     }
 
     .header img {
-      max-width: 100px;
+      max-width: 90px;
+      margin: 4px 0;
+    }
+    /* Main Layout */
+    .main {
+      display: flex;
+      gap: 20px;
     }
 
-    .header h1 {
-      color: #8e1e1e;
-      text-transform: uppercase;
-      margin: 0;
-      letter-spacing: 2px;
+    .left {
+      width: 70%;
     }
 
-    .section-title {
-      background: #fdf2f2;
-      color: #8e1e1e;
-      padding: 8px 15px;
-      font-weight: bold;
-      border-left: 5px solid #8e1e1e;
-      margin: 25px 0 15px 0;
-      font-size: 1.2rem;
+    .right {
+      width: 30%;
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
     }
 
+    /* Photo */
+    .photo-box {
+      width: 160px;
+      height: 190px;
+      border: 2px solid #b8891a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 13px;
+      
+    }
+
+    /* Rows */
     .row {
       display: flex;
-      margin-bottom: 10px;
-      line-height: 1.6;
+      margin-bottom: 6px;
+      font-size: 11px;
     }
 
     .label {
       width: 35%;
-      font-weight: 600;
-      color: #555;
+      font-weight: bold;
+      color: #7a5a00;
     }
 
     .value {
       width: 65%;
-      color: #000;
     }
 
-    .photo-placeholder {
-      float: right;
-      width: 150px;
-      height: 180px;
-      border: 2px dashed #ccc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* Section Title */
+    .section-title {
       text-align: center;
-      font-size: 0.8rem;
-      margin-left: 20px;
+      color: #b8891a;
+      font-weight: bold;
+      margin: 15px 0 10px;
+      padding: 10px;
+      font-size: 16px;
     }
 
-    @media print {
-      .biodata-container {
-        box-shadow: none;
-        border: none;
-        margin: 0;
-      }
-    }
+    /* Footer */
+    /* .footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    } */
+
+
+  /* Force A4 size */
+@media print {
+
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  body {
+    background: #fff;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* A4 container */
+  .biodata-container {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* Inner border spacing fixed */
+  .inner-border {
+    padding: 32px 35px;
+    min-height: 265mm;
+
+  }
+
+  /* Header alignment */
+  .header {
+    margin-bottom: 10px;
+  }
+
+  .header img {
+    max-width: 80px;
+  }
+
+  /* Main layout balance */
+  .main {
+    align-items: flex-start;
+  }
+
+  /* Section titles */
+  .section-title {
+    margin: 10px 0 6px;
+    padding: 4px;
+    font-size: 15px;
+  }
+
+  /* Rows spacing */
+  .row {
+    font-size: 10.8px;
+    margin-bottom: 4px;
+    line-height: 1.35;
+  }
+
+  /* Right photo alignment */
+  .right {
+    margin-top: 40px;
+  }
+
+  .photo-box {
+    width: 150px;
+    height: 180px;
+  }
+
+  /* Never split sections */
+  .inner-border,
+  .main,
+  .left,
+  .right,
+  .section-title,
+  .row {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+
+
+
+  body {
+    background: white;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Prevent page breaking */
+  .biodata-container,
+  .inner-border {
+    page-break-inside: avoid;
+  }
+
   </style>
 </head>
+
 <body>
 
   <div class="biodata-container">
+    <div class="inner-border">
 
-    <div class="header">
-<img src="assets/ganpati.png" alt="Ganpati Image" />
-   <img src="assets/shree_ganesh.png" alt="shree_ganesh.pnge" />
-    </div>
 
-    <div class="photo-placeholder">
-      Paste Passport Size Photograph Here
+       <div class="header">
+      <img src="assets/ganpati.png" alt="Ganpati" />
+      <img src="assets/shree_ganesh.png" alt="Shree Ganesh" />
     </div>
 
-    <div class="section-title">Personal Details</div>
-    <div class="row">
-      <div class="label">Full Name:</div>
-      <div class="value">Rahul Sharma</div>
-    </div>
-    <div class="row">
-      <div class="label">Date of Birth:</div>
-      <div class="value">15th August 1995</div>
-    </div>
-    <div class="row">
-      <div class="label">Height:</div>
-      <div class="value">5' 10" (178 cm)</div>
-    </div>
-    <div class="row">
-      <div class="label">Caste / Gotra:</div>
-      <div class="value">Brahmin / Bhardwaj</div>
-    </div>
-    <div class="row">
-      <div class="label">Education:</div>
-      <div class="value">B.Tech in Computer Science</div>
-    </div>
-    <div class="row">
-      <div class="label">Occupation:</div>
-      <div class="value">Senior Software Engineer at Google</div>
-    </div>
-    <div class="row">
-      <div class="label">Annual Income:</div>
-      <div class="value">₹ 25,00,000+</div>
-    </div>
+     <div class="main">
 
-    <div class="section-title">Horoscope Details</div>
-    <div class="row">
-      <div class="label">Time of Birth:</div>
-      <div class="value">10:45 AM</div>
-    </div>
-    <div class="row">
-      <div class="label">Place of Birth:</div>
-      <div class="value">Jaipur, Rajasthan</div>
-    </div>
-    <div class="row">
-      <div class="label">Mangal:</div>
-      <div class="value">No (Anshik)</div>
-    </div>
+  <!-- Left -->
+  <div class="left">
 
-    <div class="section-title">Family Background</div>
-    <div class="row">
-      <div class="label">Father's Name:</div>
-      <div class="value">Mr. Rajesh Sharma (Retired Govt. Officer)</div>
-    </div>
-    <div class="row">
-      <div class="label">Mother's Name:</div>
-      <div class="value">Mrs. Sunita Sharma (Homemaker)</div>
-    </div>
-    <div class="row">
-      <div class="label">Siblings:</div>
-      <div class="value">1 Elder Sister (Married)</div>
-    </div>
+    <!-- वैयक्तिक माहिती -->
+    <div class="section-title">वैयक्तिक माहिती</div>
 
-    <div class="section-title">Contact Information</div>
-    <div class="row">
-      <div class="label">Mobile Number:</div>
-      <div class="value">+91 98765 43210</div>
-    </div>
-    <div class="row">
-      <div class="label">Residential Address:</div>
-      <div class="value">
-        123, Shanti Nagar, Malviya Nagar, Jaipur - 302017
-      </div>
-    </div>
+    <div class="row"><div class="label">नाव :</div><div class="value">अमोल विजय पाटील</div></div>
+    <div class="row"><div class="label">जन्मतारीख :</div><div class="value">07 एप्रिल 1997</div></div>
+    <div class="row"><div class="label">जन्मवेळ :</div><div class="value">सकाळी 07 वा. 13 मि.</div></div>
+    <div class="row"><div class="label">जन्मस्थान :</div><div class="value">पुणे</div></div>
+    <div class="row"><div class="label">उंची :</div><div class="value">5 फूट 7 इंच</div></div>
+    <div class="row"><div class="label">वजन :</div><div class="value">65 किलो</div></div>
+    <div class="row"><div class="label">रक्तगट :</div><div class="value">O+</div></div>
+    <div class="row"><div class="label">वर्ण :</div><div class="value">गोरा</div></div>
+    <div class="row"><div class="label">वैवाहिक स्थिती :</div><div class="value">अविवाहित</div></div>
+
+    <div class="section-title">शैक्षणिक / व्यावसायिक माहिती</div>
+
+    <div class="row"><div class="label">शिक्षण :</div><div class="value">B.E. (Software Engineering)</div></div>
+    <div class="row"><div class="label">महाविद्यालय :</div><div class="value">SPPU, पुणे</div></div>
+    <div class="row"><div class="label">व्यवसाय :</div><div class="value">Software Engineer</div></div>
+    <div class="row"><div class="label">कंपनी :</div><div class="value">TCS, पुणे</div></div>
+    <div class="row"><div class="label">वार्षिक उत्पन्न :</div><div class="value">7 लाख रुपये</div></div>
+
+    <div class="section-title">कौटुंबिक माहिती</div>
+
+    <div class="row"><div class="label">वडिलांचे नाव :</div><div class="value">विजय पाटील</div></div>
+    <div class="row"><div class="label">वडिलांचा व्यवसाय :</div><div class="value">शेती</div></div>
+    <div class="row"><div class="label">आईचे नाव :</div><div class="value">कमलिनी विजय पाटील</div></div>
+    <div class="row"><div class="label">भाऊ :</div><div class="value">एक (विवाहित)</div></div>
+    <div class="row"><div class="label">बहिण :</div><div class="value">एक (अविवाहित)</div></div>
+
+    <div class="section-title">गोत्र / कुलदैवत माहिती</div>
+
+    <div class="row"><div class="label">धर्म :</div><div class="value">हिंदू</div></div>
+    <div class="row"><div class="label">जात :</div><div class="value">मराठा</div></div>
+    <div class="row"><div class="label">गोत्र :</div><div class="value">कश्यप</div></div>
+    <div class="row"><div class="label">देवक :</div><div class="value">श्री खंडोबा (जेजुरी)</div></div>
+    <div class="row"><div class="label">राशी :</div><div class="value">मिथुन</div></div>
+    <div class="row"><div class="label">नाडी :</div><div class="value">मध्य</div></div>
+
+    <div class="section-title">संपर्क माहिती</div>
+
+    <div class="row"><div class="label">संपर्क व्यक्ती :</div><div class="value">श्री. विजय पाटील</div></div>
+    <div class="row"><div class="label">पत्ता :</div><div class="value">मु.पो. मुळशी, ता. मुळशी, जि. पुणे</div></div>
+    <div class="row"><div class="label">मोबाईल :</div><div class="value">9437XXXXXX</div></div>
+    <div class="row"><div class="label">ई-मेल :</div><div class="value">example@gmail.com</div></div>
+
+  </div> <!-- ✅ LEFT CLOSED HERE -->
+
+  <!-- Right -->
+  <div class="right">
+    <div class="photo-box">फोटो</div>
+  </div>
+
+</div>
 
   </div>
 
