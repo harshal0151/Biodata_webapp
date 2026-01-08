@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <title>विवाह बायोडाटा</title>
+
+  <style>
+    body {
+      background: #f5f5f5;
+      padding: 20px;
+      font-family: "Noto Serif Devanagari", Mangal, serif;
+    }
+
+    .biodata-container {
+      max-width: 850px;
+      margin: auto;
+      background: #fff;
+      border: 8px solid #b8891a;
+       border-radius: 10px;
+      padding: 25px;
+    }
+
+    .inner-border {
+      border: 2px solid #d4af37;
+      border-radius: 10px;
+      padding: 10px 50px;
+    }
+
+  .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      padding-bottom: 10px;
+    
+    }
+
+    .header img {
+      max-width: 90px;
+      margin: 4px 0;
+    }
+    /* Main Layout */
+    .main {
+      display: flex;
+      gap: 20px;
+    }
+
+    .left {
+      width: 70%;
+    }
+
+    .right {
+      width: 30%;
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+
+    /* Photo */
+    .photo-box {
+      width: 160px;
+      height: 190px;
+      border: 2px solid #b8891a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 13px;
+      
+    }
+
+    /* Rows */
+    .row {
+      display: flex;
+      margin-bottom: 6px;
+      font-size: 11px;
+    }
+
+    .label {
+      width: 35%;
+      font-weight: bold;
+      color: #7a5a00;
+    }
+
+    .value {
+      width: 65%;
+    }
+
+    /* Section Title */
+    .section-title {
+      text-align: center;
+      color: #b8891a;
+      font-weight: bold;
+      margin: 15px 0 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 11px;
+    }
+.footer-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2px;
+}
+
+.footer-label{
+  font-weight: bold;
+}
+
+  /* Force A4 size */
+@media print {
+
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  body {
+    background: #fff;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* A4 container */
+  .biodata-container {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* Inner border spacing fixed */
+  .inner-border {
+    padding: 32px 35px;
+    min-height: 265mm;
+
+  }
+
+  /* Header alignment */
+  .header {
+    margin-bottom: 10px;
+  }
+
+  .header img {
+    max-width: 80px;
+  }
+
+  /* Main layout balance */
+  .main {
+    align-items: flex-start;
+  }
+
+  /* Section titles */
+  .section-title {
+    margin: 10px 0 6px;
+    padding: 4px;
+    font-size: 15px;
+  }
+
+  /* Rows spacing */
+  .row {
+    font-size: 10.8px;
+    margin-bottom: 4px;
+    line-height: 1.35;
+  }
+
+  /* Right photo alignment */
+  .right {
+    margin-top: 40px;
+  }
+
+  .photo-box {
+    width: 150px;
+    height: 180px;
+  }
+
+  /* Never split sections */
+  .inner-border,
+  .main,
+  .left,
+  .right,
+  .section-title,
+  .row {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+
+
+
+  body {
+    background: white;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Prevent page breaking */
+  .biodata-container,
+  .inner-border {
+    page-break-inside: avoid;
+  }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="biodata-container">
+    <div class="inner-border">
+
+
+       <div class="header">
+      <img src="assets/ganpati.png" alt="Ganpati" />
+      <img src="assets/shree_ganesh.png" alt="Shree Ganesh" />
+    </div>
+
+     <div class="main">
+
+  <!-- Left -->
+  <div class="left">
+
+    <!-- वैयक्तिक माहिती -->
+    <div class="section-title">वैयक्तिक माहिती</div>
+
+    <div class="row"><div class="label">नाव :</div><div class="value">अमोल विजय पाटील</div></div>
+    <div class="row"><div class="label">जन्मतारीख :</div><div class="value">07 एप्रिल 1997</div></div>
+    <div class="row"><div class="label">जन्मवेळ :</div><div class="value">सकाळी 07 वा. 13 मि.</div></div>
+    <div class="row"><div class="label">जन्मस्थान :</div><div class="value">पुणे</div></div>
+    <div class="row"><div class="label">उंची :</div><div class="value">5 फूट 7 इंच</div></div>
+    <div class="row"><div class="label">वजन :</div><div class="value">65 किलो</div></div>
+    <div class="row"><div class="label">रक्तगट :</div><div class="value">O+</div></div>
+    <div class="row"><div class="label">वर्ण :</div><div class="value">गोरा</div></div>
+    <div class="row"><div class="label">वैवाहिक स्थिती :</div><div class="value">अविवाहित</div></div>
+
+    <div class="section-title">शैक्षणिक / व्यावसायिक माहिती</div>
+
+    <div class="row"><div class="label">शिक्षण :</div><div class="value">B.E. (Software Engineering)</div></div>
+    <div class="row"><div class="label">महाविद्यालय :</div><div class="value">SPPU, पुणे</div></div>
+    <div class="row"><div class="label">व्यवसाय :</div><div class="value">Software Engineer</div></div>
+    <div class="row"><div class="label">कंपनी :</div><div class="value">TCS, पुणे</div></div>
+    <div class="row"><div class="label">वार्षिक उत्पन्न :</div><div class="value">7 लाख रुपये</div></div>
+
+    <div class="section-title">कौटुंबिक माहिती</div>
+
+    <div class="row"><div class="label">वडिलांचे नाव :</div><div class="value">विजय पाटील</div></div>
+    <div class="row"><div class="label">वडिलांचा व्यवसाय :</div><div class="value">शेती</div></div>
+    <div class="row"><div class="label">आईचे नाव :</div><div class="value">कमलिनी विजय पाटील</div></div>
+    <div class="row"><div class="label">भाऊ :</div><div class="value">एक (विवाहित)</div></div>
+    <div class="row"><div class="label">बहिण :</div><div class="value">एक (अविवाहित)</div></div>
+
+    <div class="section-title">गोत्र / कुलदैवत माहिती</div>
+
+    <div class="row"><div class="label">धर्म :</div><div class="value">हिंदू</div></div>
+    <div class="row"><div class="label">जात :</div><div class="value">मराठा</div></div>
+    <div class="row"><div class="label">गोत्र :</div><div class="value">कश्यप</div></div>
+    <div class="row"><div class="label">देवक :</div><div class="value">श्री खंडोबा (जेजुरी)</div></div>
+    <div class="row"><div class="label">राशी :</div><div class="value">मिथुन</div></div>
+    <div class="row"><div class="label">नाडी :</div><div class="value">मध्य</div></div>
+
+   
+
+  </div> <!-- ✅ LEFT CLOSED HERE -->
+
+  <!-- Right -->
+  <div class="right">
+    <div class="photo-box">फोटो</div>
+  </div>
+
+</div>
+<div class="section-title">संपर्क</div>
+ <div class="footer">
+    <div class="footer-row"><div class="footer-label">संपर्क व्यक्ती :</div><div class=""> श्री. विजय पाटील</div></div>
+    <div class="footer-row"><div class="footer-label">पत्ता :</div><div class=""> मु.पो. मुळशी, ता. मुळशी, जि. पुणे</div></div>
+    <div class="footer-row"><div class="footer-label">मोबाईल :</div><div class=""> 9437XXXXXX</div></div>
+    </div>
+  </div>
+
+</body>
+</html>
