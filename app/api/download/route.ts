@@ -22,23 +22,35 @@ export async function GET() {
 //     .replace('{{date}}', new Date().toLocaleDateString())
 //     .replace('{{total}}', '$199.00')
 
-const BASE_PATH = "http://localhost:3000/templates/assets/";
+const ASSETS_PATH = `file://${path.join(
+  process.cwd(),
+  'public',
+  'templates',
+  'assets'
+)}/`
 
 html = html
   .replace(
     './assets/ganpati.png',
-    `${BASE_PATH}/ganpati.png`
+    `${ASSETS_PATH}/ganpati.png`
   )
   .replace(
     './assets/shree_ganesh.png',
-    `${BASE_PATH}/shree_ganesh.png`
+    `${ASSETS_PATH}/shree_ganesh.png`
   )
 
   // 3️⃣ Launch Puppeteer
   const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  })
+  executablePath: process.env.PUPPETEER_EXECUTABLE_PATH,
+  headless: true,
+  args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-dev-shm-usage',
+    '--disable-gpu',
+  ],
+})
+
 
   try {
     const page = await browser.newPage()
