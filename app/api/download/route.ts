@@ -22,6 +22,18 @@ export async function GET() {
 //     .replace('{{date}}', new Date().toLocaleDateString())
 //     .replace('{{total}}', '$199.00')
 
+const BASE_PATH = "http://localhost:3000/templates/assets/";
+
+html = html
+  .replace(
+    './assets/ganpati.png',
+    `${BASE_PATH}/ganpati.png`
+  )
+  .replace(
+    './assets/shree_ganesh.png',
+    `${BASE_PATH}/shree_ganesh.png`
+  )
+
   // 3️⃣ Launch Puppeteer
   const browser = await puppeteer.launch({
     headless: true,
@@ -42,7 +54,7 @@ export async function GET() {
     })
 
     // 5️⃣ Return PDF as download
-    return new NextResponse(pdfBuffer, {
+    return new NextResponse(pdfBuffer as any, {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename="invoice.pdf"',
