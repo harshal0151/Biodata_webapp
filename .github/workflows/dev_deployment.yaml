@@ -5,7 +5,7 @@ on:
       deploy_application:
         description: Select application to deploy
         type: choice
-        opstions:
+        options:
           - Biodata_webapp
 
 run-name: Deploying ${{ inputs.deploy_application }} to Developemnt by @${{ github.actor }}
