@@ -45,9 +45,9 @@ job:
       - name: Login to instance
         uses: appleboy/ssh-action@v1.0.3
         with:
-         host: 
-         username:
-         key:  
+         host: 210.79.129.231
+         username: ubuntu
+         key: ${{ secrets.SSH_KEY }}
         script: |
           # docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p {{ secrets.DOCKERHUB_TOKEN }} our-registory.com  If direct pull not work will try manual login.
           instance_username=$(whoami)
@@ -55,8 +55,4 @@ job:
           docker stop biodata_webapp || true # to stop any old running container and if not true will continue as normally
           docker rm biodata_webapp || true # clean up to optimize space
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/biodata_webapp:latest
-          docker run -d --name biodata_webapp -p 80:8080 --restart unless-stopped ${{ secrets.DOCKERHUB_USERNAME }}/biodata_webapp:latest
-
-
-
-
+          docker run -e GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} -e GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} -e NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} -e NEXTAUTH_URL={{ secrets.NEXTAUTH_URL }} -d --name biodata_webapp -p 3000:3000 --restart unless-stopped ${{ secrets.DOCKERHUB_USERNAME }}/biodata_webapp:latest
