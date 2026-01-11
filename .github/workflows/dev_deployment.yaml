@@ -49,7 +49,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SERVER_SSH_PASSPHRASE }}
           script: |
-            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p {{ secrets.DOCKERHUB_TOKEN }}
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
             instance_username=$(whoami)
             sudo usermod -aG docker $instance_username  # to add instance user into docker group 
             docker stop biodata_webapp || true # to stop any old running container and if not true will continue as normally
