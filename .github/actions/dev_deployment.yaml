@@ -1,0 +1,58 @@
+name: Deploy Application
+on: 
+  workflow_dispatch:
+    inputs:
+      deploy_application:
+        description: Select application to deploy 
+        required: true
+        type: choice
+        opstions:
+          Biodata_webapp
+
+run-name: Deploying ${{ inputs.deploy_application }} to Developemnt by @${{ github.actor }}
+
+job:
+  build-node-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      
+      - name: Set up docker buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to docker hub 
+        uses: docker/login-action@v3
+        with: 
+          username:  ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Build docker image build and push to docker hub 
+        uses: docker/build-push-action@v6
+        with:
+          cotext: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/biodata_webapp:latest
+
+  pull-and-run-application:
+    name: Run application 
+    runs-on: ubuntu-latest
+    needs: build-node-image
+
+    steps:
+      - name: Login to instance
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+         host: 210.79.129.231
+         username: ubuntu
+         key: ${{ secrets.SSH_KEY }}
+        script: |
+          # docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p {{ secrets.DOCKERHUB_TOKEN }} our-registory.com  If direct pull not work will try manual login.
+          instance_username=$(whoami)
+          sudo usermod -aG docker $instance_username  # to add instance user into docker group 
+          docker stop biodata_webapp || true # to stop any old running container and if not true will continue as normally
+          docker rm biodata_webapp || true # clean up to optimize space
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/biodata_webapp:latest
+          docker run -e GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} -e GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} -e NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} -e NEXTAUTH_URL={{ secrets.NEXTAUTH_URL }} -d --name biodata_webapp -p 3000:3000 --restart unless-stopped ${{ secrets.DOCKERHUB_USERNAME }}/biodata_webapp:latest
