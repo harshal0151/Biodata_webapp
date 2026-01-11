@@ -11,7 +11,7 @@ on:
 
 run-name: Deploying ${{ inputs.deploy_application }} to Developemnt by @${{ github.actor }}
 
-job:
+jobs:
   build-node-image:
     runs-on: ubuntu-latest
 
