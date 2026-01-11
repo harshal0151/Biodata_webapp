@@ -33,7 +33,7 @@ jobs:
           cotext: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/biodata_webapp:latest
+            ${{ github.actor }}/biodata_webapp:latest
 
   pull-and-run-application:
     name: Run application 
@@ -53,5 +53,5 @@ jobs:
             sudo usermod -aG docker $instance_username  # to add instance user into docker group 
             docker stop biodata_webapp || true # to stop any old running container and if not true will continue as normally
             docker rm biodata_webapp || true # clean up to optimize space
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/biodata_webapp:latest
+            docker pull ${{ github.actor }}/biodata_webapp:latest
             docker run -e GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} -e GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} -e NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} -e NEXTAUTH_URL={{ secrets.NEXTAUTH_URL }} -d --name biodata_webapp -p 3000:3000 --restart unless-stopped ${{ secrets.DOCKERHUB_USERNAME }}/biodata_webapp:latest
