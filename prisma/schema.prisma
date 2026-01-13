@@ -6,10 +6,143 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  output   = "../app/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+}
+
+// User model for Google SSO authentication
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  googleId      String   @unique
+  profileImage  String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  userMadeTemplates UserMadeTemplate[]
+  orders            Order[]
+  collections       Collection[]
+
+  @@index([email])
+  @@index([googleId])
+}
+
+// Sample templates that appear on dashboard
+model SampleTemplate {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  thumbnail   String? // URL to template preview image
+  templateData Json    // Stores the template structure/content
+  category    String?  // e.g., "Professional", "Traditional", "Modern"
+  isPremium   Boolean  @default(false)
+  price       Decimal  @default(0) @db.Decimal(10, 2)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  userMadeTemplates UserMadeTemplate[]
+
+  @@index([category])
+  @@index([isActive])
+}
+
+// Collection to group user's saved templates before checkout
+model Collection {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String   @default("My Collection")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userMadeTemplates UserMadeTemplate[]
+
+  @@index([userId])
+}
+
+// User-edited templates (saved or ready for download)
+model UserMadeTemplate {
+  id               String   @id @default(cuid())
+  userId           String
+  sampleTemplateId String
+  collectionId     String?
+  title            String
+  templateData     Json // Stores edited template content
+  thumbnail        String?
+  status           TemplateStatus @default(DRAFT)
+  isSelectedForCheckout Boolean @default(false) // For cart selection
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relations
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sampleTemplate SampleTemplate @relation(fields: [sampleTemplateId], references: [id])
+  collection     Collection?    @relation(fields: [collectionId], references: [id], onDelete: SetNull)
+  orderItems     OrderItem[]
+
+  @@index([userId])
+  @@index([sampleTemplateId])
+  @@index([collectionId])
+  @@index([status])
+}
+
+// Order model for payment tracking
+model Order {
+  id              String      @id @default(cuid())
+  userId          String
+  orderNumber     String      @unique
+  totalAmount     Decimal     @db.Decimal(10, 2)
+  paymentStatus   PaymentStatus @default(PENDING)
+  paymentMethod   String?
+  paymentId       String?     // Payment gateway transaction ID
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  // Relations
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[]
+
+  @@index([userId])
+  @@index([orderNumber])
+  @@index([paymentStatus])
+}
+
+// Junction table for Order and UserMadeTemplate (many-to-many)
+model OrderItem {
+  id                 String   @id @default(cuid())
+  orderId            String
+  userMadeTemplateId String
+  price              Decimal  @db.Decimal(10, 2)
+  createdAt          DateTime @default(now())
+
+  // Relations
+  order            Order            @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  userMadeTemplate UserMadeTemplate @relation(fields: [userMadeTemplateId], references: [id], onDelete: Cascade)
+
+  @@unique([orderId, userMadeTemplateId])
+  @@index([orderId])
+  @@index([userMadeTemplateId])
+}
+
+// Enums
+enum TemplateStatus {
+  DRAFT           // Saved in collection but not purchased
+  IN_CART         // Added to cart for checkout
+  PURCHASED       // Payment completed, available for download
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
 }

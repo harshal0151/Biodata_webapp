@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import puppeteer from 'puppeteer'
 import fs from 'fs'
 import path from 'path'
+import prisma from '@/lib/prisma'
 
 export const runtime = 'nodejs'
 
@@ -14,7 +15,13 @@ export async function GET() {
     'BiodataTemplate.html'
   )
 
-  let html = fs.readFileSync(filePath, 'utf-8')
+  // let html = fs.readFileSync(filePath, 'utf-8')
+  const sampleTemplate=await prisma.sampleTemplate.findFirst({
+    where:{
+      title:'bio-data'
+    }
+  })
+  let html=(sampleTemplate?.templateData) as string;
 
   // 2️⃣ Inject dynamic data (optional)
 //   html = html
