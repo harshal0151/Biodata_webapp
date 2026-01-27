@@ -55,4 +55,4 @@ jobs:
             docker stop biodata_webapp || true # to stop any old running container and if not true will continue as normally
             docker rm biodata_webapp || true # clean up to optimize space
             docker pull harshdevops24/biodata_webapp:latest
-            docker run -e GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} -e GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} -e NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} -d --name biodata_webapp -p 3000:3000 --restart unless-stopped harshdevops24/biodata_webapp:latest
+            docker run -e GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} -e GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} -e NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} -d --name biodata_webapp -p 3010:3000 --restart unless-stopped harshdevops24/biodata_webapp:latest
